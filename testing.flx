@@ -1,0 +1,10 @@
+mod <"stdio">
+
+int main() {
+    stdio::out("hello, world!");
+    return 0;
+}
+
+if __name__ = "main" {
+    main();
+}

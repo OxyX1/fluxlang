@@ -17,7 +17,6 @@ class stdio {
     }
 
     int flush() {
-        // clears output?
         std::flush;
         return 0;
     }
