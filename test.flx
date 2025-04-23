@@ -1,0 +1,5 @@
+from stdio import "stdio";
+
+int main() {
+    stdio::out("hello, world!"); // this has to be from the stdio module
+}
