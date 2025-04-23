@@ -1,7 +1,0 @@
-add package system --> import modules, and make a module installer.
-add a .f filetype for backend modules and making packages.
-
-
-later versions:
-
-rewrite your language in fluxl

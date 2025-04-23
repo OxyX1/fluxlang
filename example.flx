@@ -1,0 +1,16 @@
+mod <"stdio">
+
+int main() {
+    stdio::out("Welcome to the Flux Language!");
+    
+    string user_input;
+    stdio::in("Please enter something: ", user_input);
+    
+    stdio::out("You entered: " + user_input);
+    
+    return 0;
+}
+
+if (__name__ == "main") {
+    main();
+}

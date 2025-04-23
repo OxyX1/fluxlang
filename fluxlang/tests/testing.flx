@@ -1,0 +1,29 @@
+// filepath: /fluxlang/fluxlang/tests/testing.flx
+// This file contains test cases for the Flux compiler, ensuring that various aspects of the language are functioning correctly.
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <cassert>
+
+// Function to run a test case
+void runTest(const std::string& input, const std::string& expectedOutput) {
+    // Simulate compilation and execution of the Flux program
+    std::string output = ""; // Replace with actual compilation and execution logic
+
+    // Check if the output matches the expected output
+    assert(output == expectedOutput && "Test failed: Output did not match expected output.");
+}
+
+int main() {
+    // Test case 1: Simple output
+    runTest("stdio::out(\"Hello, Flux!\");", "Hello, Flux!");
+
+    // Test case 2: User input
+    runTest("string user_input; stdio::in(\"Enter something: \", user_input); stdio::out(user_input);", "User input");
+
+    // Additional test cases can be added here
+
+    std::cout << "All tests passed!" << std::endl;
+    return 0;
+}

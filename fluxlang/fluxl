@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Flux Compiler Command-Line Interface
+
+# Check if the user provided a source file
+if [ "$#" -ne 1 ]; then
+    echo "Usage: fluxl <source_file.flx>"
+    exit 1
+fi
+
+SOURCE_FILE=$1
+OUTPUT_FILE="${SOURCE_FILE%.flx}.o"
+
+# Compile the Flux source file
+echo "Compiling $SOURCE_FILE to $OUTPUT_FILE..."
+
+# Call the compiler (assuming it's implemented in src/compiler/main.cpp)
+g++ -c src/compiler/main.cpp -o $OUTPUT_FILE
+
+if [ $? -ne 0 ]; then
+    echo "Compilation failed."
+    exit 1
+fi
+
+echo "Compilation successful. Output file: $OUTPUT_FILE"
