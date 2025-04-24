@@ -1,0 +1,15 @@
+1. add interpreter code
+2. make a official installer for fluxlang.
+3. add a package system including a install command that can get packages.
+
+
+** package system website panel **
+
+1. add credidentials system.
+2. make a admin key and email verification for admin accounts.
+3. make the package system secure to stop unethical hacking.
+
+** future planning **
+
+1. find a bughunter to find bugs.
+2. hire a ethical hacker to help make package system secure.

@@ -1,1 +1,5 @@
-mod <"stdio">
+int main() {
+    out ++ "hello, world!"; // adds text instead of setting it to a print.
+    return 0;
+}
+

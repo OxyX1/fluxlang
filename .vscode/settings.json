@@ -2,6 +2,8 @@
     "files.associations": {
         "lexer.h": "c",
         "error.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "readme": "c",
+        "stdlib.h": "c"
     }
 }
