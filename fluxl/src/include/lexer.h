@@ -102,18 +102,28 @@ Token **Lexer_Tokenize(Lexer *lexer, size_t *token_count) {
 }
 
 char* READF(const char* filename) {
-    FILE* file = fopen(filename, "r");
-    if (!file) return NULL;
+    printf("Attempting to open file: %s\n", filename); // Debug print
+    FILE *file = fopen(filename, "r");
+    if (!file) {
+        perror("Error opening file"); // Print detailed error
+        return NULL;
+    }
 
     fseek(file, 0, SEEK_END);
-    long len = ftell(file);
-    rewind(file);
+    long length = ftell(file);
+    fseek(file, 0, SEEK_SET);
 
-    char *buf = malloc(len + 1);
-    fread(buf, 1, len, file);
-    buf[len] = '\0';
+    char *buffer = (char *)malloc(length + 1);
+    if (!buffer) {
+        fclose(file);
+        return NULL;
+    }
+
+    fread(buffer, 1, length, file);
+    buffer[length] = '\0';
     fclose(file);
-    return buf;
+
+    return buffer;
 }
 
 int has_flx_extension(const char *filename) {
