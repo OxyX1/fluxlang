@@ -1,5 +1,4 @@
 int main() {
-    out ++ "hello, world!"; // adds text instead of setting it to a print.
+    out ++ "hello, world!";
     return 0;
 }
-

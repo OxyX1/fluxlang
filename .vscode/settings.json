@@ -4,6 +4,7 @@
         "error.h": "c",
         "string.h": "c",
         "readme": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "stdio.h": "c"
     }
 }
