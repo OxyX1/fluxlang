@@ -5,6 +5,8 @@
         "string.h": "c",
         "readme": "c",
         "stdlib.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "parser.h": "c",
+        "ctype.h": "c"
     }
 }

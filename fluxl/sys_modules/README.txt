@@ -1,1 +1,0 @@
-the sys_modules folder is were the stdio.f, and string.f files are located.

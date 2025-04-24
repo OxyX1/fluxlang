@@ -1,18 +1,20 @@
 #!/bin/bash
 
-# Set the name of the output binary
+# Exit on any error
+set -e
+
+echo "🔨 Building fluxc from sources..."
+
+# Compiler output binary name
 OUTPUT="fluxc"
 
-# Find all .c files in the current directory
-SRC_FILES=$(find . -name "*.c")
+# Source folder
+SRC_DIR="fluxl"
 
-# Compile with GCC and show errors if any
-echo "Compiling $OUTPUT..."
-gcc -Wall -Wextra -o $OUTPUT $SRC_FILES
+# Find all .c files in the fluxl folder
+SOURCES=$(find "$SRC_DIR" -name '*.c')
 
-# Check if compilation succeeded
-if [ $? -eq 0 ]; then
-    echo "✅ Build successful: ./$OUTPUT"
-else
-    echo "❌ Build failed"
-fi
+# Compile
+gcc -o "$OUTPUT" $SOURCES
+
+echo "✅ Build complete: ./$OUTPUT"
