@@ -1,0 +1,11 @@
+Things needed:
+    Lexer -> reads the source code and tokenizes them.
+    Parser -> Responsible for organizing the tokens like running whats inside of parentecies first then executing next.
+    ast -> An in-memory representation of the program's structure, showing how statements, expressions, and constructs relate to each other.
+    Sematic Analysis -> Ensures that the code makes sense according to the language's rules (type checking, variable scoping, etc.).
+    Intermediate representation -> A low-level representation of the program that simplifies optimization and code generation.
+    Optimizer -> Improves the intermediate representation to make the final code more efficient (e.g., removing dead code, simplifying expressions).
+    CodeGen -> Converts the optimized IR into the target language (machine code, bytecode, or another intermediate language). aka Assembly
+    Package System -> The language uses packages aka modules to make functions work without having to write them manually. (e.g. System Modules).
+    Debugger/ErrorHandling -> Debugs and handles errors.
+    compiler/interpreter -> A compiler translates source code into executable code (machine code or bytecode), while an interpreter directly executes source code.
