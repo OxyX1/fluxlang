@@ -1,0 +1,20 @@
+mod <stdio.fp>
+
+package example;
+
+void examples() {
+    int my_int = 10;
+    float my_float = 9.0;
+    string my_string = "hello, world!"; // cannot be casted.
+
+    int my_casted_float = (float) 10;
+
+    stdio::output ++ "hello, world!";
+
+
+    const string my_input_value;
+    stdio::output ++ "my input! >> "; stdio::destroyline(); // when the print stops and goes to the next line to create a new object aka the input it will destroy that new line and create and keep it on the last line.
+    stdio::readl(my_input_value);
+
+    if (my_input_value == "1")
+}

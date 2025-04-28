@@ -1,23 +1,14 @@
-// lexer.h
-#ifndef LEXER_H
-#define LEXER_H
+#include <stdio.h>
 
-typedef enum {
-    TOKEN_EOF,
-    TOKEN_IDENTIFIER,
-    TOKEN_NUMBER,
-    TOKEN_PLUS,
-    TOKEN_ASSIGN,
-    TOKEN_SEMICOLON
-} TokenType;
 
-typedef struct {
-    TokenType type;
-    char* text;
-} Token;
+enum {
+    BRACR,
+    BRACL,
+    LQUOTE,
+    RQUOTE,
+    
+}
 
-void init_lexer(const char* input);
-Token next_token(void);
-void free_token(Token tok);
+int init_lexer() {
 
-#endif
+}
