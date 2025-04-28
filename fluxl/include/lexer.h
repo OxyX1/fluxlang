@@ -1,14 +1,3 @@
 #include <stdio.h>
+#include <string.h>
 
-
-enum {
-    BRACR,
-    BRACL,
-    LQUOTE,
-    RQUOTE,
-    
-}
-
-int init_lexer() {
-
-}
