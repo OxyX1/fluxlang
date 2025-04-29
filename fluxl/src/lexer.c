@@ -1,9 +1,9 @@
 #include "../include/lexer.h"
 #include <stdio.h>
-#include <string.h>
 #include <ctype.h>
+#include <string.h>
 
-const char *keywords[] = { "if", "else", "while", "mod", NULL };
+const char *keywords[] = { "if", "else", "while", "mod", "return", NULL };
 
 int is_keyword(const char *str) {
     for (int i = 0; keywords[i] != NULL; i++) {
@@ -27,7 +27,8 @@ Token get_next_token(const char **src) {
         return token;
     }
 
-    if (isalpha(**src) || **src == '_') { // Identifiers and Keywords
+    // Handle identifiers and keywords
+    if (isalpha(**src) || **src == '_') {
         int i = 0;
         while (isalnum(**src) || **src == '_') {
             if (i < MAX_TOKEN_LENGTH - 1)
@@ -42,7 +43,8 @@ Token get_next_token(const char **src) {
             token.type = TOKEN_IDENTIFIER;
         }
     }
-    else if (isdigit(**src)) { // Numbers
+    // Handle numbers
+    else if (isdigit(**src)) {
         int i = 0;
         while (isdigit(**src)) {
             if (i < MAX_TOKEN_LENGTH - 1)
@@ -52,7 +54,8 @@ Token get_next_token(const char **src) {
         token.value[i] = '\0';
         token.type = TOKEN_NUMBER;
     }
-    else if (**src == '"') { // String literals
+    // Handle string literals
+    else if (**src == '"') {
         (*src)++; // Skip opening quote
         int i = 0;
         while (**src && **src != '"') {
@@ -64,48 +67,33 @@ Token get_next_token(const char **src) {
         if (**src == '"') (*src)++; // Skip closing quote
         token.type = TOKEN_STRING;
     }
-    else { // Operators and Symbols
+    // Handle operators and symbols
+    else {
         char c = **src;
+        token.value[0] = c;
+        token.value[1] = '\0';
+        (*src)++;
 
-        if (c == '+' || c == '-') { // Handle ++ and --
-            token.value[0] = c;
-            if (*(*src + 1) == c) { // Check for ++ or --
-                token.value[1] = c;
-                token.value[2] = '\0';
-                (*src) += 2;
-            } else {
-                token.value[1] = '\0';
-                (*src)++;
-            }
-            token.type = TOKEN_OPERATOR;
-        }
-        else if (c == '*' || c == '/') { // Single-char operators
-            token.value[0] = c;
-            token.value[1] = '\0';
-            (*src)++;
-            token.type = TOKEN_OPERATOR;
-        }
-        else { // Symbols and others
-            token.value[0] = c;
-            token.value[1] = '\0';
-            (*src)++;
-
-            switch (c) {
-                case '{': case '}':
-                case '(': case ')':
-                case '[': case ']':
-                case ';': case '.':
-                    token.type = TOKEN_SYMBOL;
-                    break;
-                case '=':
+        switch (c) {
+            case '+': 
+                if (**src == '+') {
+                    token.value[1] = '+';
+                    token.value[2] = '\0';
+                    (*src)++;
                     token.type = TOKEN_OPERATOR;
-                    break;
-                default:
-                    token.type = TOKEN_UNKNOWN;
-                    break;
-            }
+                } else {
+                    token.type = TOKEN_OPERATOR;
+                }
+                break;
+            case '>': case '<': case '=': case '!': case '*': case '/':
+            case '(': case ')': case '{': case '}': case '[': case ']':
+            case ';': case ',': case '.':
+                token.type = TOKEN_SYMBOL;
+                break;
+            default:
+                token.type = TOKEN_UNKNOWN;
+                break;
         }
     }
-
     return token;
 }

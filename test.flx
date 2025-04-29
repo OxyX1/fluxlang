@@ -1,1 +1,6 @@
-int x = 1 + 2;
+mod <stdio.fp>
+
+int main() {
+    output ++ "hello, world!";
+    return 0;
+}

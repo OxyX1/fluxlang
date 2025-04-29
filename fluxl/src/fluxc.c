@@ -1,68 +1,44 @@
-#include "../include/lexer.h"
 #include <stdio.h>
 #include <stdlib.h>
-
-void run_lexer(const char *filename) {
-    FILE *file = fopen(filename, "r");
-    if (!file) {
-        fprintf(stderr, "Could not open file: %s\n", filename);
-        return;
-    }
-
-    fseek(file, 0, SEEK_END);
-    long size = ftell(file);
-    fseek(file, 0, SEEK_SET);
-
-    char *source = (char *)malloc(size + 1);
-    if (!source) {
-        fprintf(stderr, "Memory allocation failed!\n");
-        fclose(file);
-        return;
-    }
-
-    fread(source, 1, size, file);
-    source[size] = '\0';
-    fclose(file);
-
-    const char *src = source;
-    Token token;
-    while ((token = get_next_token(&src)).type != TOKEN_EOF) {
-        switch (token.type) {
-            case TOKEN_IDENTIFIER:
-                printf("Identifier: %s\n", token.value);
-                break;
-            case TOKEN_KEYWORD:
-                printf("Keyword: %s\n", token.value);
-                break;
-            case TOKEN_NUMBER:
-                printf("Number: %s\n", token.value);
-                break;
-            case TOKEN_STRING:
-                printf("String: \"%s\"\n", token.value);
-                break;
-            case TOKEN_SYMBOL:
-                printf("Symbol: %s\n", token.value);
-                break;
-            case TOKEN_OPERATOR:
-                printf("Operator: %s\n", token.value);
-                break;
-            case TOKEN_UNKNOWN:
-                printf("Unknown: %s\n", token.value);
-                break;
-            default:
-                break;
-        }
-    }
-
-    free(source);
-}
+#include "../include/lexer.h"
+#include "../include/parser.h"
+#include "../include/ast.h"
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
-        fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
+        printf("Usage: %s <source_file>\n", argv[0]);
         return 1;
     }
 
-    run_lexer(argv[1]);
+    FILE *file = fopen(argv[1], "r");
+    if (!file) {
+        printf("Could not open file %s\n", argv[1]);
+        return 1;
+    }
+
+    fseek(file, 0, SEEK_END);
+    long length = ftell(file);
+    fseek(file, 0, SEEK_SET);
+
+    char *source = malloc(length + 1);
+    fread(source, 1, length, file);
+    fclose(file);
+
+    source[length] = '\0';
+
+    // Initialize parser
+    Parser parser;
+    init_parser(&parser, source);
+
+    // Parse and generate AST
+    ASTNode *root = parse(&parser);
+
+    // Print AST
+    print_ast(root, 0);
+
+    // Free resources
+    free_ast(root);
+    free(source);
+
     return 0;
 }
